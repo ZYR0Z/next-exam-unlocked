@@ -25,10 +25,10 @@ jobs:
     
     - name: Linux Build
       if: matrix.os == 'ubuntu-latest'
-      run: npm run build
+      run: cd student && npm run build
       
     - name: Windows build
-      run: npm run build:win
+      run: cd student && npm run build:win
 
     - name: Get filename
       id: get_filename
