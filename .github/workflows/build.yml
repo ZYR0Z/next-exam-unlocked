@@ -32,11 +32,11 @@ jobs:
       id: get_filename
       run: |
         if [ "${{ runner.os }}" = "Linux" ]; then
-          echo "::set-output name=filename::release/1.0.0/*.AppImage"
-          echo "::set-output name=appName::Next-Exam-Student-${{ github.ref }}.AppImage"
+          echo "::set-output name=filename::release/1.0.0/Next-Exam-Student_1.0.0.AppImage"
+          echo "::set-output name=appName::Next-Exam-Student.AppImage"
         elif [ "${{ runner.os }}" = "Windows" ]; then
-          echo "::set-output name=filename::release/1.0.0/*.exe"
-          echo "::set-output name=appName::Next-Exam-Student-${{ github.ref }}.exe"
+          echo "::set-output name=filename::release/1.0.0/Next-Exam-Student_1.0.0.exe"
+          echo "::set-output name=appName::Next-Exam-Student.exe"
         fi
       shell: bash
 
