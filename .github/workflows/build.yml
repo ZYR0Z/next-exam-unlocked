@@ -32,11 +32,13 @@ jobs:
       id: get_filename
       run: |
         if [ "${{ runner.os }}" = "Linux" ]; then
-          echo "::set-output name=filename::dist/*.AppImage"
+          echo "::set-output name=filename::release/1.0.0/*.AppImage"
           echo "::set-output name=appName::Next-Exam-Student-${{ github.ref }}.AppImage"
         elif [ "${{ runner.os }}" = "Windows" ]; then
-          echo "::set-output name=filename::dist/*.exe"
+          echo "::set-output name=filename::release/1.0.0/*.exe"
           echo "::set-output name=appName::Next-Exam-Student-${{ github.ref }}.exe"
+        fi
+      shell: bash
 
     - name: Create Release
       if: github.run_number == 1
