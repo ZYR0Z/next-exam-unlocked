@@ -1,48 +1,52 @@
-
-import { defineConfig, Plugin } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import pkg from '../../package.json'
-import  {vueI18n} from '@intlify/vite-plugin-vue-i18n'
-import path from 'path'
+import { defineConfig, Plugin } from "vite";
+import vue from "@vitejs/plugin-vue";
+import pkg from "../../package.json";
+import { vueI18n } from "@intlify/vite-plugin-vue-i18n";
+import path from "path";
 
 // https://vitejs.dev/config/
 
 export default defineConfig({
   mode: process.env.NODE_ENV,
   root: __dirname,
+  // CHANGED: to remove build error
+  define: {
+    __VUE_PROD_DEVTOOLS__: "false"
+  },
   plugins: [
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: tag => tag === 'webview'
+          isCustomElement: (tag) => tag === "webview"
         }
       }
     }),
     vueI18n({
-        compositionOnly: false,
-        include: path.resolve(__dirname, './src/locales/*'),
-        runtimeOnly: false,
-        fullInstall: true,
-        forceStringify : true,
-      })
+      compositionOnly: false,
+      include: path.resolve(__dirname, "./src/locales/*"),
+      runtimeOnly: false,
+      fullInstall: true,
+      forceStringify: true
+    })
   ],
-  base: './',
- 
+  base: "./",
+
   build: {
     sourcemap: true,
-    outDir: '../../dist/renderer',
+    outDir: "../../dist/renderer",
     emptyOutDir: true,
     minify: true,
-    chunkSizeWarningLimit:5000
+    chunkSizeWarningLimit: 5000
   },
-  css: {   // this covers bootstrap css warnings when minifying the css code
+  css: {
+    // this covers bootstrap css warnings when minifying the css code
     postcss: {
       plugins: [
         {
-          postcssPlugin: 'internal:charset-removal',
+          postcssPlugin: "internal:charset-removal",
           AtRule: {
             charset: (atRule) => {
-              if (atRule.name === 'charset') {
+              if (atRule.name === "charset") {
                 atRule.remove();
               }
             }
@@ -52,6 +56,6 @@ export default defineConfig({
     }
   },
   server: {
-    port: pkg.env.PORT,
-  },
-})
+    port: pkg.env.PORT
+  }
+});
